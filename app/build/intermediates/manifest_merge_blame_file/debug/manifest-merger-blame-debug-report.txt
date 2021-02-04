@@ -1,0 +1,125 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.invaderprogrammer.android.badmorning"
+4    android:installLocation="internalOnly"
+5    android:versionCode="3"
+6    android:versionName="1.2" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="19"
+9-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml
+10        android:targetSdkVersion="28" />
+10-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml
+11
+12    <uses-permission android:name="android.permission.WAKE_LOCK" />
+12-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:6:5-68
+12-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:6:22-65
+13    <uses-permission android:name="android.permission.VIBRATE" />
+13-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:7:5-66
+13-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:7:22-63
+14    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+14-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:8:5-81
+14-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:8:22-78
+15    <uses-permission android:name="android.permission.QUICKBOOT_POWERON" />
+15-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:9:5-76
+15-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:9:22-73
+16    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+16-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:10:5-80
+16-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:10:22-77
+17
+18    <application
+18-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:12:5-58:19
+19        android:allowBackup="true"
+19-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:13:9-35
+20        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+20-->[com.android.support:support-compat:28.0.0] C:\Users\kirya\.gradle\caches\transforms-2\files-2.1\dd1cf78f22bdd94f550130b281f27c97\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+21        android:debuggable="true"
+22        android:icon="@mipmap/ic_launcher"
+22-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:14:9-43
+23        android:label="@string/app_name"
+23-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:15:9-41
+24        android:roundIcon="@mipmap/ic_launcher_round"
+24-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:16:9-54
+25        android:supportsRtl="true"
+25-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:17:9-35
+26        android:theme="@style/AppTheme" >
+26-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:18:9-40
+27        <activity
+27-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:19:9-28:20
+28            android:name="com.invaderprogrammer.android.badmorning.BadMorningActivity"
+28-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:20:13-47
+29            android:launchMode="singleTop"
+29-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:21:13-43
+30            android:screenOrientation="portrait" >
+30-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:22:13-49
+31            <intent-filter>
+31-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:23:13-27:29
+32                <action android:name="android.intent.action.MAIN" />
+32-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:24:17-69
+32-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:24:25-66
+33
+34                <category android:name="android.intent.category.LAUNCHER" />
+34-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:26:17-77
+34-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:26:27-74
+35            </intent-filter>
+36        </activity>
+37        <activity
+37-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:29:9-33:76
+38            android:name="com.invaderprogrammer.android.badmorning.AddAlarmActivity"
+38-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:30:13-45
+39            android:parentActivityName="com.invaderprogrammer.android.badmorning.BadMorningActivity"
+39-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:31:13-61
+40            android:screenOrientation="portrait"
+40-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:32:13-49
+41            android:windowSoftInputMode="stateHidden|adjustPan" />
+41-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:33:13-64
+42        <activity
+42-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:34:9-37:59
+43            android:name="com.invaderprogrammer.android.badmorning.AlarmManagerActivity"
+43-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:35:13-49
+44            android:screenOrientation="portrait"
+44-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:36:13-49
+45            android:theme="@style/NoActionBar" />
+45-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:37:13-47
+46
+47        <receiver android:name="com.invaderprogrammer.android.badmorning.AlarmManagerBroadcastReceiver" />
+47-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:39:9-76
+47-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:39:19-64
+48        <receiver android:name="com.invaderprogrammer.android.badmorning.StartupReceiver" >
+48-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:40:9-46:20
+48-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:40:19-50
+49            <intent-filter>
+49-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:41:13-45:29
+50                <action android:name="android.intent.action.BOOT_COMPLETED" />
+50-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:42:17-79
+50-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:42:25-76
+51                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+51-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:43:17-82
+51-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:43:25-79
+52                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+52-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:44:17-82
+52-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:44:25-79
+53            </intent-filter>
+54        </receiver>
+55        <receiver
+55-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:47:9-54:20
+56            android:name="com.invaderprogrammer.android.badmorning.NotificationButtonReceiver"
+56-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:48:13-55
+57            android:enabled="true"
+57-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:49:13-35
+58            android:exported="true" >
+58-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:50:13-36
+59            <intent-filter>
+59-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:51:13-53:29
+60                <action android:name="com.invaderprogrammer.android.badmorning.NOTIFICATION" />
+60-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:52:17-96
+60-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:52:25-93
+61            </intent-filter>
+62        </receiver>
+63        <receiver android:name="com.invaderprogrammer.android.badmorning.NotificationAlarmReceiver" >
+63-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:55:9-57:20
+63-->C:\Users\kirya\AndroidStudioProjects\BadMorning\app\src\main\AndroidManifest.xml:55:19-60
+64        </receiver>
+65    </application>
+66
+67</manifest>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#BFBFD4</color>
+    <color name="background_fragment">#493C5D</color>
+    <color name="recycler_background">#3E344B</color>
+    <color name="add_text">#291C4F</color>
+    <color name="line_add">#423653</color>
+    <color name="activity_background">#5B4B72</color>
+</resources>

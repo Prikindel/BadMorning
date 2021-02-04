@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:id="@+id/sample1"
+    android:elevation="4dp"
+    tools:ignore="UnusedAttribute">
+
+    <LinearLayout
+        android:background="@color/recycler_background"
+        android:id="@+id/setting_wrapper"
+        android:orientation="horizontal"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/settings"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_settings"
+            tools:ignore="ContentDescription" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="90dp"
+            android:background="@color/background_fragment"/>
+        <ImageButton
+            android:id="@+id/change"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_change"
+            tools:ignore="ContentDescription" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="90dp"
+            android:background="@color/background_fragment"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/recycler_background"
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="70dp"
+        android:weightSum="1"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="1dp"
+            android:layout_height="90dp"
+            android:background="@color/background_fragment"/>
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/ic_delete"
+            tools:ignore="ContentDescription,RtlHardcoded" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/alarmLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/recycler_background">
+
+        <FrameLayout
+            android:id="@+id/frameLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_gravity="center_horizontal"
+                android:elevation="8dp"
+                android:text="TEXT"
+                android:textSize="50dp"
+                tools:ignore="HardcodedText,SpUsage" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="text"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout3"
+            tools:ignore="HardcodedText,SpUsage" />
+
+    </android.support.constraint.ConstraintLayout>
+</com.daimajia.swipe.SwipeLayout>

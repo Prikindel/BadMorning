@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/on_off_day"
+        android:title="@string/on"
+        android:icon="@drawable/ic_alarm_on"
+        app:showAsAction="ifRoom" />
+    <!-- <item android:id="@+id/settings"
+        android:title="@string/settings" /> -->
+    <item android:id="@+id/change_time_day"
+        android:title="@string/change_time_day"
+        android:icon="@drawable/change_time_day"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/delete_day"
+        android:title="@string/delete_day" />
+
+</menu>

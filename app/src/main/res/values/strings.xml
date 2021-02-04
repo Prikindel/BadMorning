@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Bad Morning</string>
+    <string name="switch_on">Включен</string>
+    <string name="switch_off">Отключен</string>
+    <string name="alarm_dialog_title">Время будильника</string>
+    <string name="music">Мелодия</string>
+    <string name="vibration">Вибрировать при сигнале</string>
+    <string name="delete">Удалить после срабатывания</string>
+    <string name="description">Описание</string>
+    <string name="add_alarm">Добавить</string>
+    <string name="extend">Продлить \nна 10 минут</string>
+    <string name="pull_up">Для отключения потяните вверх</string>
+    <string name="settings">Настройки</string>
+    <string name="on">Включить будильники</string>
+    <string name="off">Выключить будильники</string>
+    <string name="alarm_name">Будильник</string>
+    <string name="default_music">Мелодия по умолчанию</string>
+    <string name="delete_day">Удалить день</string>
+    <string name="description_delete_day">Действительно удалить все будильники текущего дня?</string>"
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="notification_text">Будильник звонил 15 минут.</string>
+    <string name="reduce_time">Убавить время</string>
+    <string name="add_time">Добавить время</string>
+    <string name="change_time_day">Изменить время дня</string>
+    <string name="change_time_day_dialog">Изменить время будильников всего дня</string>
+</resources>

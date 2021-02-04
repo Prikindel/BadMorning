@@ -1,0 +1,339 @@
+<html>
+<head>
+<title>AlarmManagerFragment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(104,151,187); }
+.s3 { color: rgb(106,135,89); }
+.ls0 { height: 1px; border-width: 0; color: rgb(77,77,77); background-color:rgb(77,77,77)}
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+AlarmManagerFragment.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">com.invaderprogrammer.android.badmorning</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.animation.AnimatorSet</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.animation.ObjectAnimator</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.annotation.SuppressLint</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.BroadcastReceiver</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.IntentFilter</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.graphics.Point</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.graphics.PointF</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.media.AudioManager</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.media.MediaPlayer</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Build</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Handler</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Vibrator</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.annotation.NonNull</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.annotation.Nullable</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.constraint.ConstraintLayout</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.Fragment</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.MotionEvent</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.WindowManager</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.animation.Animation</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.animation.AnimationSet</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.animation.ScaleAnimation</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.LinearLayout</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.Calendar</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.UUID</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">public class </span><span class="s1">AlarmManagerFragment </span><span class="s0">extends </span><span class="s1">Fragment 
+        </span><span class="s0">implements </span><span class="s1">View.OnTouchListener { 
+    </span><span class="s0">private </span><span class="s1">Vibrator mVibrator</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">UUID mIdAlarm</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Point mSizeScreen</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private float </span><span class="s1">mSizeScreenY</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private float </span><span class="s1">mTouchMoveY</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private float </span><span class="s1">mDifferenceTouchY</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">DayAlarm mDayAlarm</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Uri mAlert</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">MediaPlayer mMediaPlayer</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">AudioManager mAudioManager</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Handler mHandler</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Runnable myRunnable = </span><span class="s0">new </span><span class="s1">Runnable() { 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">run() { 
+            NotificationAlarm.notificationAlarmCalled(getActivity()</span><span class="s0">, </span><span class="s1">mDayAlarm)</span><span class="s0">;</span><span class="s1"> 
+            finish()</span><span class="s0">;</span><span class="s1"> 
+        } 
+    }</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private long </span><span class="s1">timer = </span><span class="s2">1000</span><span class="s1">*</span><span class="s2">60</span><span class="s1">*</span><span class="s2">15</span><span class="s0">;</span><span class="s1"> 
+ 
+    </span><span class="s0">private </span><span class="s1">LinearLayout mLinearLayoutPullUp</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">ImageView mImagePullUp</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">TextView mPullUp</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">TextView mAlarmText</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">TextView mTimeText</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Button mButton</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">ConstraintLayout mConstraintLayout</span><span class="s0">;</span><span class="s1"> 
+ <hr class="ls0">    </span><span class="s0">public static </span><span class="s1">AlarmManagerFragment newInstance() { 
+        </span><span class="s0">return new </span><span class="s1">AlarmManagerFragment()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ <hr class="ls0">    </span><span class="s0">private </span><span class="s1">BroadcastReceiver vibrateReceiver = </span><span class="s0">new </span><span class="s1">BroadcastReceiver() { 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">onReceive(Context context</span><span class="s0">, </span><span class="s1">Intent intent) { 
+            </span><span class="s0">if </span><span class="s1">(intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) { 
+                startVibrate()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } 
+    }</span><span class="s0">;</span><span class="s1"> 
+ <hr class="ls0">    @Override 
+    </span><span class="s0">public void </span><span class="s1">onCreate(@Nullable Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+ 
+        mHandler = </span><span class="s0">new </span><span class="s1">Handler()</span><span class="s0">;</span><span class="s1"> 
+        mHandler.postDelayed(myRunnable</span><span class="s0">, </span><span class="s1">timer)</span><span class="s0">;</span><span class="s1"> 
+ 
+        PreferenceSettings.setActivityOpen(getActivity()</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)</span><span class="s0">;</span><span class="s1"> 
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)</span><span class="s0">;</span><span class="s1"> 
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)</span><span class="s0">;</span><span class="s1"> 
+ 
+        String stringUuid = PreferenceSettings.getUuidAlarm(getActivity())</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(stringUuid == </span><span class="s0">null</span><span class="s1">) { 
+            mDayAlarm = </span><span class="s0">null;</span><span class="s1"> 
+            finish()</span><span class="s0">;</span><span class="s1"> 
+        } 
+ 
+        mIdAlarm = UUID.fromString(stringUuid)</span><span class="s0">;</span><span class="s1"> 
+        mDayAlarm = </span><span class="s0">new </span><span class="s1">DayOfTheWeek(getActivity()</span><span class="s0">, </span><span class="s2">1</span><span class="s1">).getAlarm(mIdAlarm)</span><span class="s0">;</span><span class="s1"> 
+        SetAlarmManager.setAlarmManager(getActivity()</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        IntentFilter filter = </span><span class="s0">new </span><span class="s1">IntentFilter(Intent.ACTION_SCREEN_OFF)</span><span class="s0">;</span><span class="s1"> 
+        getActivity().registerReceiver(vibrateReceiver</span><span class="s0">, </span><span class="s1">filter)</span><span class="s0">;</span><span class="s1"> 
+        startVibrate()</span><span class="s0">;</span><span class="s1"> 
+ 
+        mSizeScreen = </span><span class="s0">new </span><span class="s1">Point()</span><span class="s0">;</span><span class="s1"> 
+        getActivity().getWindowManager().getDefaultDisplay().getSize(mSizeScreen)</span><span class="s0">;</span><span class="s1"> 
+        mSizeScreenY = mSizeScreen.y / </span><span class="s2">4</span><span class="s0">;</span><span class="s1"> 
+ 
+        mAlert = mDayAlarm.getMusic()</span><span class="s0">;</span><span class="s1"> 
+        mMediaPlayer = </span><span class="s0">new </span><span class="s1">MediaPlayer()</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">try </span><span class="s1">{ 
+            mMediaPlayer.setDataSource(getActivity()</span><span class="s0">, </span><span class="s1">mAlert)</span><span class="s0">;</span><span class="s1"> 
+        } </span><span class="s0">catch </span><span class="s1">(IOException e) { 
+            e.printStackTrace()</span><span class="s0">;</span><span class="s1"> 
+        } 
+        mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM) != </span><span class="s2">0</span><span class="s1">) { 
+            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM)</span><span class="s0">;</span><span class="s1"> 
+            mMediaPlayer.setLooping(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+            mMediaPlayer.setOnPreparedListener(</span><span class="s0">new </span><span class="s1">MediaPlayer.OnPreparedListener() { 
+                @Override 
+                </span><span class="s0">public void </span><span class="s1">onPrepared(MediaPlayer mp) { 
+                    mMediaPlayer.start()</span><span class="s0">;</span><span class="s1"> 
+                } 
+            })</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">try </span><span class="s1">{ 
+                mMediaPlayer.prepareAsync()</span><span class="s0">;</span><span class="s1"> 
+            } </span><span class="s0">catch </span><span class="s1">(IllegalStateException e) { 
+                e.printStackTrace()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } 
+        </span><span class="s0">if </span><span class="s1">(mDayAlarm.isEnable()) { 
+            NotificationAlarm.clearNotificationEnable(mDayAlarm.getKeyId())</span><span class="s0">;</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            NotificationAlarm.clearNotification(mDayAlarm.getKeyId())</span><span class="s0">;</span><span class="s1"> 
+        } 
+    } 
+ <hr class="ls0">    @SuppressLint({</span><span class="s3">&quot;SimpleDateFormat&quot;</span><span class="s0">, </span><span class="s3">&quot;ClickableViewAccessibility&quot;</span><span class="s0">, </span><span class="s3">&quot;SetTextI18n&quot;</span><span class="s0">, </span><span class="s3">&quot;WrongConstant&quot;</span><span class="s1">}) 
+    @Nullable 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">View onCreateView(@NonNull LayoutInflater inflater</span><span class="s0">, </span><span class="s1">@Nullable ViewGroup container</span><span class="s0">, </span><span class="s1">@Nullable Bundle savedInstanceState) { 
+        View view = inflater.inflate(R.layout.screen_alarm</span><span class="s0">, </span><span class="s1">container</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        mLinearLayoutPullUp = view.findViewById(R.id.linear_layout_pull_up)</span><span class="s0">;</span><span class="s1"> 
+        mImagePullUp = view.findViewById(R.id.image_pull_up)</span><span class="s0">;</span><span class="s1"> 
+        mPullUp = view.findViewById(R.id.pull_up)</span><span class="s0">;</span><span class="s1"> 
+        mAlarmText = view.findViewById(R.id.alarm_text)</span><span class="s0">;</span><span class="s1"> 
+        mTimeText = view.findViewById(R.id.time_text)</span><span class="s0">;</span><span class="s1"> 
+        mButton = view.findViewById(R.id.button)</span><span class="s0">;</span><span class="s1"> 
+        mConstraintLayout = view.findViewById(R.id.constraint_layout)</span><span class="s0">;</span><span class="s1"> 
+ 
+        mLinearLayoutPullUp.setOnTouchListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        mImagePullUp.setOnTouchListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        mPullUp.setOnTouchListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        startAnimation()</span><span class="s0">;</span><span class="s1"> 
+ 
+        mAlarmText.setText(mDayAlarm.getDescription())</span><span class="s0">;</span><span class="s1"> 
+        mTimeText.setText(mDayAlarm.toString())</span><span class="s0">;</span><span class="s1"> 
+        mTimeText.setTextSize(</span><span class="s2">60</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        mButton.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                Calendar calendar = mDayAlarm.getTime()</span><span class="s0">;</span><span class="s1"> 
+                calendar.setTimeInMillis(Calendar.getInstance().getTimeInMillis() + </span><span class="s2">1000</span><span class="s1">*</span><span class="s2">60</span><span class="s1">*</span><span class="s2">10</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                DayAlarm dayAlarm = </span><span class="s0">new </span><span class="s1">DayAlarm(calendar</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                dayAlarm.setDelete(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                dayAlarm.setMusic(mDayAlarm.getMusic())</span><span class="s0">;</span><span class="s1"> 
+                dayAlarm.setDescription(mDayAlarm.getDescription())</span><span class="s0">;</span><span class="s1"> 
+                dayAlarm.setVibration(mDayAlarm.isVibration())</span><span class="s0">;</span><span class="s1"> 
+                dayAlarm.setEnable(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+                DayOfTheWeek dayOfTheWeek = </span><span class="s0">new </span><span class="s1">DayOfTheWeek(getActivity()</span><span class="s0">, </span><span class="s1">isCalendarOfDay(dayAlarm.getTime().get(Calendar.DAY_OF_WEEK)))</span><span class="s0">;</span><span class="s1"> 
+                dayOfTheWeek.setAlarm(dayAlarm)</span><span class="s0">;</span><span class="s1"> 
+                dayAlarm = dayOfTheWeek.getAlarm(dayAlarm.getId())</span><span class="s0">;</span><span class="s1"> 
+ 
+                </span><span class="s0">if </span><span class="s1">(!SetAlarmManager.setAlarmManager(getActivity()</span><span class="s0">, false</span><span class="s1">)) { 
+                    NotificationAlarm.notificationAlarm(getActivity()</span><span class="s0">, </span><span class="s1">dayAlarm)</span><span class="s0">;</span><span class="s1"> 
+                } 
+ 
+ 
+                finish()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">return </span><span class="s1">view</span><span class="s0">;</span><span class="s1"> 
+    } 
+ <hr class="ls0">    </span><span class="s0">private void </span><span class="s1">startAnimation() { 
+        ObjectAnimator heightAnimator = ObjectAnimator.ofFloat(mImagePullUp</span><span class="s0">, </span><span class="s3">&quot;y&quot;</span><span class="s0">, </span><span class="s1">mPullUp.getTop() + </span><span class="s2">30</span><span class="s0">, </span><span class="s1">mImagePullUp.getBottom() - </span><span class="s2">30</span><span class="s1">).setDuration(</span><span class="s2">1500</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        heightAnimator.setRepeatCount(-</span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        ScaleAnimation scale = </span><span class="s0">new </span><span class="s1">ScaleAnimation(</span><span class="s2">1.0f</span><span class="s0">, </span><span class="s2">1.2f</span><span class="s0">, </span><span class="s2">1.0f</span><span class="s0">, </span><span class="s2">1.2f</span><span class="s0">,</span><span class="s1"> 
+                Animation.RELATIVE_TO_SELF</span><span class="s0">, </span><span class="s2">0.5f</span><span class="s0">, </span><span class="s1">Animation.RELATIVE_TO_SELF</span><span class="s0">, </span><span class="s2">0.5f</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        scale.setDuration(</span><span class="s2">1500</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        scale.setRepeatCount(-</span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        scale.setRepeatMode(Animation.REVERSE)</span><span class="s0">;</span><span class="s1"> 
+ 
+        AnimationSet set = </span><span class="s0">new </span><span class="s1">AnimationSet (</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        set.addAnimation(scale)</span><span class="s0">;</span><span class="s1"> 
+        mButton.startAnimation(set)</span><span class="s0">;</span><span class="s1"> 
+ 
+        AnimatorSet animatorSet = </span><span class="s0">new </span><span class="s1">AnimatorSet()</span><span class="s0">;</span><span class="s1"> 
+        animatorSet.play(heightAnimator)</span><span class="s0">;</span><span class="s1"> 
+        animatorSet.start()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ <hr class="ls0">    </span><span class="s0">private void </span><span class="s1">finish() { 
+        </span><span class="s0">if </span><span class="s1">(mDayAlarm.isEnable()) { 
+            NotificationAlarm.clearNotificationEnable(mDayAlarm.getKeyId())</span><span class="s0">;</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            NotificationAlarm.clearNotification(mDayAlarm.getKeyId())</span><span class="s0">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">if </span><span class="s1">(Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) { 
+            getActivity().finishAndRemoveTask()</span><span class="s0">;</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            getActivity().finish()</span><span class="s0">;</span><span class="s1"> 
+        } 
+    } 
+ <hr class="ls0">    </span><span class="s0">private void </span><span class="s1">startVibrate() { 
+        </span><span class="s0">if</span><span class="s1">(mDayAlarm != </span><span class="s0">null </span><span class="s1">&amp;&amp; mDayAlarm.isVibration()) { 
+            </span><span class="s0">long</span><span class="s1">[] pattern = {</span><span class="s2">500</span><span class="s0">, </span><span class="s2">800</span><span class="s0">, </span><span class="s2">400</span><span class="s0">, </span><span class="s2">800</span><span class="s1">}</span><span class="s0">;</span><span class="s1"> 
+            mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE)</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(mVibrator.hasVibrator()) { 
+                mVibrator.vibrate(pattern</span><span class="s0">, </span><span class="s2">2</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } 
+    } 
+ <hr class="ls0">    @Override 
+    </span><span class="s0">public void </span><span class="s1">onPause() { 
+        </span><span class="s0">super</span><span class="s1">.onPause()</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(mDayAlarm.isDelete()) { 
+            DayOfTheWeek dayOfTheWeek = </span><span class="s0">new </span><span class="s1">DayOfTheWeek(getActivity()</span><span class="s0">, </span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+            dayOfTheWeek.deleteAlarm(mDayAlarm)</span><span class="s0">;</span><span class="s1"> 
+        } 
+    } 
+ <hr class="ls0">    @Override 
+    </span><span class="s0">public void </span><span class="s1">onDestroy() { 
+        </span><span class="s0">super</span><span class="s1">.onDestroy()</span><span class="s0">;</span><span class="s1"> 
+        mHandler.removeCallbacks(myRunnable)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if</span><span class="s1">(mDayAlarm != </span><span class="s0">null </span><span class="s1">&amp;&amp; mDayAlarm.isVibration()) { 
+            mVibrator.cancel()</span><span class="s0">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">if</span><span class="s1">(mDayAlarm != </span><span class="s0">null </span><span class="s1">&amp;&amp; mDayAlarm.getMusic() != </span><span class="s0">null </span><span class="s1">&amp;&amp; mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM) != </span><span class="s2">0</span><span class="s1">) { 
+            mMediaPlayer.stop()</span><span class="s0">;</span><span class="s1"> 
+        } 
+        getActivity().unregisterReceiver(vibrateReceiver)</span><span class="s0">;</span><span class="s1"> 
+ 
+        PreferenceSettings.setActivityOpen(getActivity()</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+    } 
+ <hr class="ls0">    @SuppressLint(</span><span class="s3">&quot;ClickableViewAccessibility&quot;</span><span class="s1">) 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onTouch(View v</span><span class="s0">, </span><span class="s1">MotionEvent event) { 
+        PointF current = </span><span class="s0">new </span><span class="s1">PointF(event.getX()</span><span class="s0">, </span><span class="s1">event.getY())</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">float </span><span class="s1">y = current.y</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">float </span><span class="s1">different = </span><span class="s2">0</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">switch </span><span class="s1">(event.getAction()) { 
+            </span><span class="s0">case </span><span class="s1">MotionEvent.ACTION_DOWN: 
+                mTouchMoveY = </span><span class="s2">0</span><span class="s0">;</span><span class="s1"> 
+                mDifferenceTouchY = y</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">MotionEvent.ACTION_MOVE: 
+                different = mDifferenceTouchY - y</span><span class="s0">;</span><span class="s1"> 
+                mTouchMoveY += different</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">if </span><span class="s1">(Math.abs(different) &gt; </span><span class="s2">2</span><span class="s1">) { 
+                    mConstraintLayout.setMaxHeight((</span><span class="s0">int</span><span class="s1">) (mConstraintLayout.getHeight() - different))</span><span class="s0">;</span><span class="s1"> 
+                } 
+                mDifferenceTouchY = y</span><span class="s0">;</span><span class="s1"> 
+ 
+                </span><span class="s0">if </span><span class="s1">(mTouchMoveY &gt;= (mSizeScreen.y / </span><span class="s2">3</span><span class="s1">)) { 
+                    finish()</span><span class="s0">;</span><span class="s1"> 
+                } 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">MotionEvent.ACTION_UP: 
+                </span><span class="s0">if </span><span class="s1">(mTouchMoveY &gt;= mSizeScreenY / </span><span class="s2">2</span><span class="s1">) { 
+                    finish()</span><span class="s0">;</span><span class="s1"> 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    mConstraintLayout.setMaxHeight(mSizeScreen.y)</span><span class="s0">;</span><span class="s1"> 
+                } 
+            </span><span class="s0">case </span><span class="s1">MotionEvent.ACTION_CANCEL: 
+                </span><span class="s0">break;</span><span class="s1"> 
+        } 
+ 
+        </span><span class="s0">return true;</span><span class="s1"> 
+    } 
+ <hr class="ls0">    </span><span class="s0">private static int </span><span class="s1">isCalendarOfDay(</span><span class="s0">int </span><span class="s1">dayOfWeek) { 
+ 
+        </span><span class="s0">switch </span><span class="s1">(dayOfWeek) { 
+            </span><span class="s0">case </span><span class="s1">Calendar.MONDAY: 
+                dayOfWeek = </span><span class="s2">0</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">Calendar.TUESDAY: 
+                dayOfWeek = </span><span class="s2">1</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">Calendar.WEDNESDAY: 
+                dayOfWeek = </span><span class="s2">2</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">Calendar.THURSDAY: 
+                dayOfWeek = </span><span class="s2">3</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">Calendar.FRIDAY: 
+                dayOfWeek = </span><span class="s2">4</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">Calendar.SATURDAY: 
+                dayOfWeek = </span><span class="s2">5</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">Calendar.SUNDAY: 
+                dayOfWeek = </span><span class="s2">6</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">dayOfWeek</span><span class="s0">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>
